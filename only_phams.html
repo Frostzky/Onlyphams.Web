@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OnlyPhams — Antho's Digital Universe</title>
+  <meta name="description" content="Antho's tech-meets-creative HQ: projects, homelab, blog, gear, cars & contact." />
+  <meta name="color-scheme" content="dark light" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0f0f10;--bg-soft:#151518;--card:#17171a;--muted:#a8acb3;--text:#f5f5f7;--brand1:#4fc3f7;--brand2:#a65aff;--ring:rgba(79,195,247,.5);
+      --radius:16px;--shadow:0 10px 30px rgba(0,0,0,.4);
+    }
+    :root.light{--bg:#ffffff;--bg-soft:#f3f4f6;--card:#ffffff;--text:#111827;--muted:#667085;--ring:rgba(166,90,255,.25);}
+    *{box-sizing:border-box}
+    html,body{margin:0; padding:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial; background:var(--bg); color:var(--text);}
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:1100px; margin:0 auto; padding:0 20px}
+    header{position:sticky; top:0; backdrop-filter:saturate(140%) blur(10px); background:linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,0)); border-bottom:1px solid rgba(255,255,255,.06); z-index:50}
+    .nav{display:flex; align-items:center; justify-content:space-between; height:64px}
+    .brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.2px}
+    .logo{display:grid; place-items:center; width:32px; height:32px; border-radius:50%; background:conic-gradient(from 180deg, var(--brand1), var(--brand2)); box-shadow:0 0 40px rgba(166,90,255,.35)}
+    .nav a{opacity:.9; font-weight:600}
+    .nav .links{display:flex; gap:18px}
+    .btn{display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:12px; background:linear-gradient(135deg, var(--brand1), var(--brand2)); color:#0b0b0c; font-weight:700; border:none; cursor:pointer; box-shadow:0 8px 24px rgba(166,90,255,.35)}
+    .ghost{background:transparent; color:var(--text); border:1px solid rgba(255,255,255,.12)}
+    .toggle{border-radius:999px; border:1px solid rgba(255,255,255,.12); padding:8px 12px; cursor:pointer}
+
+    /* Hero */
+    .hero{position:relative; padding:90px 0 60px}
+    .bgfx{position:absolute; inset:-10% -10% auto -10%; height:60vh; background:radial-gradient(40% 50% at 30% 10%, rgba(79,195,247,.25), transparent 40%), radial-gradient(45% 55% at 70% 20%, rgba(166,90,255,.22), transparent 50%); filter:blur(40px); opacity:.8; pointer-events:none}
+    .hero h1{font-size:clamp(32px,6vw,72px); line-height:1.05; margin:0 0 10px; letter-spacing:-.02em}
+    .hero p{color:var(--muted); max-width:720px; font-size:clamp(16px,2.1vw,20px)}
+    .roles{display:flex; gap:10px; flex-wrap:wrap; margin:18px 0 26px}
+    .role{padding:8px 12px; border-radius:999px; background:linear-gradient(135deg, rgba(79,195,247,.15), rgba(166,90,255,.15)); border:1px solid rgba(255,255,255,.12)}
+    .cta{display:flex; gap:12px; flex-wrap:wrap; margin-top:22px}
+
+    /* Sections */
+    section{padding:70px 0}
+    .section-title{font-size:28px; margin:0 0 18px}
+    .grid{display:grid; grid-template-columns:repeat(12,1fr); gap:18px}
+    .card{grid-column:span 12; background:var(--card); padding:18px; border-radius:var(--radius); border:1px solid rgba(255,255,255,.06); box-shadow:var(--shadow)}
+    @media (min-width:700px){.card.span-6{grid-column:span 6}.card.span-4{grid-column:span 4}}
+
+    .muted{color:var(--muted)}
+    .kicker{letter-spacing:.16em; text-transform:uppercase; font-size:12px; color:var(--muted)}
+
+    .list{display:grid; gap:12px}
+    .tag{display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.06)}
+
+    /* Gear cards */
+    .gear-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px}
+    .gear{background:var(--card); border-radius:16px; padding:14px; border:1px solid rgba(255,255,255,.08)}
+    .gear h4{margin:6px 0}
+    .gear .price{font-weight:700}
+    .gear .buy{margin-top:8px}
+
+    /* Footer */
+    footer{padding:40px 0 80px; border-top:1px solid rgba(255,255,255,.08)}
+
+    /* Link styles */
+    .link{display:inline-flex; align-items:center; gap:8px; font-weight:700}
+    .link svg{width:16px; height:16px}
+
+    /* Smooth anchor offsets */
+    :target{scroll-margin-top:90px}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <div class="brand"><span class="logo" aria-hidden="true"></span> OnlyPhams</div>
+      <nav class="links">
+        <a href="#about">About</a>
+        <a href="#setup">Tech Setup</a>
+        <a href="#blog">Blog</a>
+        <a href="#gear">Gear</a>
+        <a href="#cars">Cars</a>
+        <a href="#contact">Contact</a>
+        <button class="toggle" id="themeToggle" aria-label="Toggle theme">🌗</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="bgfx"></div>
+      <div class="wrap">
+        <p class="kicker">OnlyPhams.org</p>
+        <h1>Hey, I’m Antho — I build tech setups, make cool projects, and share what I learn.</h1>
+        <p class="muted">A social‑creative home base for my homelab, projects, affiliate gear picks, and car adventures. Based in Melbourne.</p>
+        <div class="roles" id="roles"></div>
+        <div class="cta">
+          <a class="btn" href="#setup">Explore My Setup</a>
+          <a class="btn ghost" href="#blog">Read the Blog</a>
+          <a class="btn ghost" href="#gear">Shop My Gear</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="wrap">
+        <h2 class="section-title">About / Journey</h2>
+        <div class="grid">
+          <article class="card span-6">
+            <h3>Who I am</h3>
+            <p class="muted">IT trainee at Western Health. I like turning curiosity into projects — from Windows Server labs and Proxmox to self‑hosted services and content creation.</p>
+            <div class="list">
+              <span class="tag">Intune / AD / MECM</span>
+              <span class="tag">Proxmox / Docker</span>
+              <span class="tag">Plex / Minecraft</span>
+              <span class="tag">React Native (in progress)</span>
+            </div>
+          </article>
+          <article class="card span-6">
+            <h3>What I’m about</h3>
+            <p class="muted">Efficiency, learning, and sharing. Expect homelab write‑ups, gear recs I actually use, BRZ build notes, and simple guides that respect your time.</p>
+            <div class="list">
+              <span class="tag">Builder</span>
+              <span class="tag">Creator</span>
+              <span class="tag">Dreamer</span>
+              <span class="tag">Techpreneur</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="setup">
+      <div class="wrap">
+        <h2 class="section-title">Tech Setup / Homelab</h2>
+        <div id="setupGrid" class="grid"></div>
+      </div>
+    </section>
+
+    <section id="blog">
+      <div class="wrap">
+        <h2 class="section-title">Blog & Notes</h2>
+        <div id="blogGrid" class="grid"></div>
+      </div>
+    </section>
+
+    <section id="gear">
+      <div class="wrap">
+        <h2 class="section-title">Gear & Recommendations</h2>
+        <p class="muted">As an Amazon Associate, I earn from qualifying purchases. I only list items I own or would buy.</p>
+        <div id="gearGrid" class="gear-grid"></div>
+      </div>
+    </section>
+
+    <section id="cars">
+      <div class="wrap">
+        <h2 class="section-title">Cars / BRZ Build</h2>
+        <div class="grid" id="carsGrid"></div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="wrap">
+        <h2 class="section-title">Connect</h2>
+        <div class="grid">
+          <div class="card span-6">
+            <p>Email: <a class="link" href="mailto:phamanthony668@gmail.com">phamanthony668@gmail.com</a></p>
+            <p>Socials:
+              <a class="link" href="#" aria-label="YouTube">YouTube ↗</a> ·
+              <a class="link" href="#" aria-label="GitHub">GitHub ↗</a> ·
+              <a class="link" href="#" aria-label="Instagram">Instagram ↗</a> ·
+              <a class="link" href="#" aria-label="LinkedIn">LinkedIn ↗</a>
+            </p>
+          </div>
+          <div class="card span-6">
+            <h3>Newsletter</h3>
+            <p class="muted">Optional — add a form service (e.g., Beehiiv/Mailchimp) and paste the embed code here.</p>
+            <a class="btn" href="#">Join My Newsletter</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="grid">
+        <div class="card"><strong>Built with 💻 by Antho</strong> — Hosted on GitHub Pages. <span class="muted">© <span id="year"></span> OnlyPhams.org</span></div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // --- Theme toggle with localStorage ---
+    const root = document.documentElement;
+    const themeToggle = document.getElementById('themeToggle');
+    const saved = localStorage.getItem('theme');
+    if(saved === 'light') root.classList.add('light');
+    themeToggle.addEventListener('click', () => {
+      root.classList.toggle('light');
+      localStorage.setItem('theme', root.classList.contains('light') ? 'light' : 'dark');
+    });
+
+    // --- Dynamic Roles ---
+    const rolesEl = document.getElementById('roles');
+    const roles = ['IT Trainee','Builder','Creator','Dreamer','Techpreneur'];
+    roles.forEach(r=>{ const b=document.createElement('span'); b.className='role'; b.textContent=r; rolesEl.appendChild(b); });
+
+    // --- Data (Edit these to customize content) ---
+    const setupItems = [
+      { title:'Proxmox Host (MFF)', desc:'32GB RAM, running LXC + VMs: n8n, Pi-hole, Minecraft server.', tags:['Energy Efficient','DIY Build'] },
+      { title:'NAS / Media', desc:'RAID array for Plex, backups, and project storage.', tags:['Storage','Server'] },
+      { title:'ZV‑E10 Camera', desc:'Stock lens (upgrading soon) for vlogs and cinematic b‑roll.', tags:['Creator Gear'] },
+      { title:'Networking', desc:'VLANs, Cloudflare Tunnel, remote access, DNS‑sink.', tags:['Network','Security'] },
+    ];
+
+    const blogPosts = [
+      { title:'Homelab: From Zero to Proxmox', blurb:'My path to a tidy, energy‑aware lab that anyone can replicate.', link:'#' },
+      { title:'Gear I Actually Use', blurb:'No fluff, just the stuff that survived my daily abuse.', link:'#' },
+      { title:'Simple Trading Habits', blurb:'Routines that keep me calm and consistent.', link:'#' },
+    ];
+
+    const gear = [
+      { name:'OptiPlex Micro (Refurb)', price:'AU$—', note:'Perfect low‑power homelab starter.', url:'#' },
+      { name:'IronWolf NAS HDD 8TB', price:'AU$—', note:'Reliable, quiet storage for Plex/backups.', url:'#' },
+      { name:'Sony ZV‑E10', price:'AU$—', note:'Great entry‑creator camera body.', url:'#' },
+      { name:'Elgato Key Light', price:'AU$—', note:'Clean lighting for desk/video.', url:'#' },
+    ];
+
+    const cars = [
+      { title:'Subaru BRZ', desc:'Build list: UEL headers, coilovers, pads/rotors, wheels.', tags:['Daily Driver','Build In Progress'] },
+    ];
+
+    // --- Render helpers ---
+    const setupGrid=document.getElementById('setupGrid');
+    setupItems.forEach(item=>{
+      const el=document.createElement('article');
+      el.className='card span-6';
+      el.innerHTML = `<h3>${item.title}</h3><p class="muted">${item.desc}</p><div class="list">${item.tags.map(t=>`<span class='tag'>${t}</span>`).join('')}</div>`;
+      setupGrid.appendChild(el);
+    });
+
+    const blogGrid=document.getElementById('blogGrid');
+    blogPosts.forEach(p=>{
+      const el=document.createElement('article');
+      el.className='card span-4';
+      el.innerHTML = `<h3>${p.title}</h3><p class="muted">${p.blurb}</p><a class='link' href='${p.link}'>Read ↗</a>`;
+      blogGrid.appendChild(el);
+    });
+
+    const gearGrid=document.getElementById('gearGrid');
+    gear.forEach(g=>{
+      const el=document.createElement('div');
+      el.className='gear';
+      el.innerHTML = `<span class='kicker'>Recommendation</span><h4>${g.name}</h4><p class='muted'>${g.note}</p><div class='price'>${g.price}</div><div class='buy'><a class='btn' href='${g.url}' target='_blank' rel='nofollow noopener sponsored'>Buy / View</a></div>`;
+      gearGrid.appendChild(el);
+    });
+
+    const carsGrid=document.getElementById('carsGrid');
+    cars.forEach(c=>{
+      const el=document.createElement('article');
+      el.className='card span-6';
+      el.innerHTML = `<h3>${c.title}</h3><p class='muted'>${c.desc}</p><div class='list'>${c.tags.map(t=>`<span class='tag'>${t}</span>`).join('')}</div>`;
+      carsGrid.appendChild(el);
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
